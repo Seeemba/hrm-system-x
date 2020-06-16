@@ -1,0 +1,39 @@
+@import "variables";
+
+.report-title {
+  color: $first;
+  padding-left: 24px;
+}
+
+// custom sort arrows for mat-table
+.mat-sort-header-stem {
+  background: none;
+  display: none!important;
+}
+.mat-sort-header-pointer-middle{
+  background: none;
+  display: none!important;
+}
+.mat-sort-header-indicator{
+  top: 5px!important;
+  color: red;
+}
+
+// custom header
+mat-header-cell.mat-column-complianceScore {
+  button {
+    text-align: left;
+  }
+}
+mat-header-cell {
+  &.mat-column-grossPayTotal,
+  &.mat-column-payrollAdminTotal,
+  &.mat-column-labourCostTotal {
+    button {
+      text-align: right;
+    }
+  }
+}
+mat-footer-row mat-footer-cell.mat-column-name {
+  justify-content: flex-end;
+}

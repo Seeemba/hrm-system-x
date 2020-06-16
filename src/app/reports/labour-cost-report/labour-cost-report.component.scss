@@ -1,0 +1,112 @@
+@import '../../../scss/variables';
+
+.mat-table {
+  mat-cell {
+    color: $second;
+  }
+  .darker {
+    color: $darker;
+    font-weight: bolder;
+  }
+
+  // columns width
+  .mat-column-name {
+    flex-basis: 20%;
+    min-width: 120px;
+    padding-right: 20px;
+  }
+  .mat-column-workerCount {
+    flex-basis: 10%;
+    min-width: 40px;
+    padding-right: 20px;
+  }
+  .mat-column-complianceScore {
+    flex-basis: 10%;
+    min-width: 80px;
+  }
+  .mat-column-grossPayTotal {
+    flex-basis: 15%;
+    min-width: 100px;
+  }
+  .mat-column-payrollAdminTotal {
+    flex-basis: 15%;
+    min-width: 100px;
+  }
+  .mat-column-labourCostTotal {
+    flex-basis: 15%;
+    min-width: 100px;
+    padding-right: 20px;
+  }
+  .mat-column-workForce {
+    padding-left: 15px;
+    flex-basis: 10%;
+    min-width: 50px;
+  }
+
+  // "Tear down this wall!"
+  mat-header-row, mat-row, mat-footer-row {
+    border-style: none;
+  }
+
+  // justify content
+  .mat-column-grossPayTotal,
+  .mat-column-payrollAdminTotal,
+  .mat-column-labourCostTotal {
+    justify-content: flex-end;
+  }
+  .mat-column-workForce {
+    justify-content: flex-start;
+  }
+
+  mat-row, mat-footer-row {
+    .mat-column-name {
+      font-weight: bolder;
+    }
+
+    .mat-column-complianceScore,
+    .mat-column-labourCostTotal {
+      border-width: 0;
+      border-right-width: 1px;
+      border-right-color: $border;
+      border-style: solid;
+    }
+
+    .mat-column-complianceScore,
+    .mat-column-workForce {
+      font-size: 16px;
+      font-weight: bolder;
+    }
+    .mat-column-workerCount,
+    .mat-column-grossPayTotal,
+    .mat-column-payrollAdminTotal,
+    .mat-column-labourCostTotal {
+      font-size: 24px;
+      font-weight: lighter;
+    }
+    .mat-column-grossPayTotal {
+      color: $third;
+    }
+  }
+
+  mat-footer-row {
+    margin-top: 30px;
+
+    mat-footer-cell {
+      color: $fourth;
+    }
+
+    border-style: none;
+    .mat-column-complianceScore,
+    .mat-column-labourCostTotal {
+      border-width: 0;
+      border-right-width: 1px;
+      border-right-color: $border;
+      border-style: solid;
+    }
+  }
+
+  // horizontal spacer
+  .h-spacer:first-of-type {
+    margin-bottom: 30px;
+  }
+}

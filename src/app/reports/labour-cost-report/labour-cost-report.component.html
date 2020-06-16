@@ -1,0 +1,95 @@
+<div class="table-report">
+  <h2 class="report-title">Labour cost report</h2>
+  <mat-table
+    *ngIf="!isError"
+    [@sortTable]="sortAnimate"
+    [dataSource]="dataSource" matSort (matSortChange)="sortData($event)" matSortDisableClear  matSortDirection="asc" class="full-width-table">
+    <!-- Payroll Provider Column -->
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> PAYROLL <br> PROVIDER </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'name'}">
+        {{column.name}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> TOTAL </mat-footer-cell>
+    </ng-container>
+
+    <!-- Worker Column -->
+    <ng-container matColumnDef="workerCount">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> WORKER </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'workerCount'}">
+        {{column.workerCount}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getTotal('workerCount')}} </mat-footer-cell>
+    </ng-container>
+
+    <!-- Compliance Score Column -->
+    <ng-container matColumnDef="complianceScore">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> COMPLIANCE <br> SCORE </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'complianceScore'}">
+        {{column.complianceScore | percent:'1.0-0'}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{total ? (total.complianceScore | percent : '1.0-0') : '-'}} </mat-footer-cell>
+    </ng-container>
+
+    <!-- Gross Pay Column -->
+    <ng-container matColumnDef="grossPayTotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> GROSS <br> PAY (£) </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'grossPayTotal'}">
+        {{column.grossPayTotal | number:'1.0-0'}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getTotal('grossPayTotal')}} </mat-footer-cell>
+    </ng-container>
+
+    <!-- Payroll Admin Column -->
+    <ng-container matColumnDef="payrollAdminTotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> PAYROLL <br> ADMIN (£) </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'payrollAdminTotal'}">
+        {{column.payrollAdminTotal ? (column.payrollAdminTotal | number:'1.0-0') : '-'}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getTotal('payrollAdminTotal')}} </mat-footer-cell>
+    </ng-container>
+
+    <!-- Labour Cost Column -->
+    <ng-container matColumnDef="labourCostTotal">
+      <mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition="before"> LABOUR <br> COST (£) </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'labourCostTotal'}">
+        {{column.labourCostTotal | number:'1.0-0'}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> {{getTotal('labourCostTotal')}} </mat-footer-cell>
+    </ng-container>
+
+    <!-- Workforce Column -->
+    <ng-container matColumnDef="workForce">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> WORK-<br>FORCE </mat-header-cell>
+      <mat-cell
+        *matCellDef="let column"
+        [ngClass]="{'darker': sortedColumn === 'workForce'}">
+        {{column.workForce | percent:'1.1-1'}}
+      </mat-cell>
+      <mat-footer-cell *matFooterCellDef> 100% </mat-footer-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row
+      [ngClass]="{'h-spacer': sortedColumn === 'name'}"
+      *matRowDef="let column; columns: displayedColumns;">
+    </mat-row>
+    <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+  </mat-table>
+
+  <div *ngIf="isError" class="mat-error">
+    An error occurred. Please check connection.
+  </div>
+</div>
